@@ -615,10 +615,10 @@ question_function_map = [
     (match_questions[12], yamal_more_sot_messi),           # Q13 Yamal more SoT than Messi
     (match_questions[13], team_more_corners),              # Q14 Spain more corners
     (match_questions[14], spain_5plus_shooters),           # Q15 5+ different Spain shooters
-    (match_questions[15], lambda q,a,f,u: 0.39),  # Q16 10+ total corners
+    (match_questions[15], lambda q,a,f,u: 0.39),           # Q16 10+ total corners
     (match_questions[16], total_shots),                    # Q17 22+ total shots
     (match_questions[17], lambda q,a,f,u: 0.43),           # Q18 Yamal G/A — Kalshi anchor
-    (match_questions[18], lambda q,a,f,u: 0.59),  # Q19 Messi G/A
+    (match_questions[18], lambda q,a,f,u: 0.59),           # Q19 Messi G/A
     (match_questions[19], argentina_win_wc),               # Q20 Argentina win WC
 ]
 
