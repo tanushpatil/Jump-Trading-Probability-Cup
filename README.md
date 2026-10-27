@@ -2,6 +2,7 @@
 A probabilistic forecasting project developed for the 2026 Jump Trading FIFA World Cup Probability Cup. The competition involved submitting probabilities for 10-15 questions per match, such as "Will Messi have 1+ shots on target?" or "Will Norway have more corners than Senegal?" I finished in the top 6% of 4,000+ competitors, earning 1,920 Relative Brier Points across 551 forecasts.
 
 **Scoring**
+
 Contestants were scored on a Relative Brier Points system. After submitting your match probabilities, your forecasts would be compared to the crowd average forecasts with this system. The two equations used were YBS = (py - pa)**2 and CBS = (pc - pa)**2, where YBS is your brier score for a specific question, py is the probability you submitted for that question, pa is the probability of the actual outcome (settles to 1 if the outcome of the question was YES and 0 if the outcome of the question was NO), CBS is the crowd's Brier Score, and pc is the probability the crowd submitted for that question (computed by averaging all contestant's probabilities for that question). Then, the points you received for that question, the Relative Brier Points (RBP) was calculated by computing RBP = YBS - CBS. 
 
 EXAMPLE: _________
