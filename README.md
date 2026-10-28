@@ -44,7 +44,7 @@ My model used 3 distributions to model each question type:
 Each question type is represented by a function in the model that takes in the inputs above. 
 
 EXAMPLE:
-
+```python
 def total_shots(question, anchors, favorite, underdog):
     lambda_total_shots = lambda_inputs['fav_shot_rate'] + lambda_inputs['und_shot_rate']
     match = re.search(r'(\d+) or more', question.lower())
@@ -52,6 +52,7 @@ def total_shots(question, anchors, favorite, underdog):
     prob = 1 - poisson.cdf(shot_threshold - 1, lambda_total_shots)
 
     return round(prob, 4)
+```
 
 The above example is for a total shots question (Will there be __ or more total shots?"). It computes an expected total shots using the favorite team's shot rate and underdog shot rate. It then takes in the question (the question_function_map at the bottom of the model maps the specific question in match_questions, so this function would only take in a total shots question). It would then get the specific string in the question that says "__ or more total shots" where __ has the shot threshold for the question. It then converts the number in the string to an integer and uses a Poisson distribution to derive the probability of __ or more shots. The rest of the functions work similarly.
 
