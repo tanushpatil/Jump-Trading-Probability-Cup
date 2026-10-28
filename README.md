@@ -41,7 +41,7 @@ My model used 3 distributions to model each question type:
 | Corners, cards, shots | Poisson | Baseline model for count events |
 | Comparative outcomes | Skellam | Modeled differences between independent Poisson counts |
 
-Each question type is represented by a function in the model that takes in the inputs above. 
+Each question type is represented by a function in the model that takes in the inputs in the Core Inputs section. 
 
 EXAMPLE:
 ```python
