@@ -5,8 +5,6 @@ A probabilistic forecasting project developed for the 2026 Jump Trading FIFA Wor
 
 Contestants were scored on a Relative Brier Points system. After submitting your match probabilities, your forecasts would be compared to the crowd average forecasts with this system. The two equations used were YBS = (py - pa)**2 and CBS = (pc - pa)**2, where YBS is your brier score for a specific question, py is the probability you submitted for that question, pa is the probability of the actual outcome (settles to 1 if the outcome of the question was YES and 0 if the outcome of the question was NO), CBS is the crowd's Brier Score, and pc is the probability the crowd submitted for that question (computed by averaging all contestant's probabilities for that question). Then, the points you received for that question, the Relative Brier Points (RBP) was calculated by computing RBP = YBS - CBS. 
 
-EXAMPLE: _________
-
 ## Data Sources
 
 Kalshi: All forecasts began from Kalshi market prices. A set of anchors was pulled from Kalshi for every match to "anchor" each forecast with liquid market prices. The anchors included each team's win price, draw price, each team scoring 1+ goal, match having 1+ goal, and both teams scoring, among other anchors (full set of anchors in model file). These anchors were used as inputs to the probability distributions utilized to model each question. 
@@ -46,6 +44,7 @@ My model used 3 distributions to model each question type:
 Each question type is represented by a function in the model that takes in the inputs above. 
 
 EXAMPLE:
+
 def total_shots(question, anchors, favorite, underdog):
     lambda_total_shots = lambda_inputs['fav_shot_rate'] + lambda_inputs['und_shot_rate']
     match = re.search(r'(\d+) or more', question.lower())
