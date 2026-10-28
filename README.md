@@ -57,3 +57,20 @@ def total_shots(question, anchors, favorite, underdog):
 The above example is for a total shots question (Will there be __ or more total shots?"). It computes an expected total shots using the favorite team's shot rate and underdog shot rate. It then takes in the question (the question_function_map at the bottom of the model maps the specific question in match_questions, so this function would only take in a total shots question). It would then get the specific string in the question that says "__ or more total shots" where __ has the shot threshold for the question. It then converts the number in the string to an integer and uses a Poisson distribution to derive the probability of __ or more shots. The rest of the functions work similarly.
 
 After probabilities were computed for all questions, I routed the probabilities to Google Gemini to flag any inconsistencies (certain questions could be correlated with others - submitting a high probability for a team scoring 2+ goals but submitting a low probability for the same team having more than 4 shots on target is not consistent). I also manually checked lineups to see if certain players being mentioned in the questions were in the starting lineup or on the bench. Lineups were posted about an hour before the match, so after I had my probabilities, I would check if a certain player who I forecasted to have 2+ shots on target was on the bench - meaning he would likely be substituted on around the 60th-70th minute, giving him a much lower chance of having 2+ shots on target. I would then manually decrease the probability (if I forecasted that question to be 40%, for example, I would submit 15-20% instead, since my 40% was under the assumption that he was playing the entire match, but 15-20% is a stronger estimate if he is only playing 20-40 minutes). This became a strong source of edge, since many contestants would submit higher probabilities despite those players being on the bench, and often those questions would resolve to NO because the player either wouldn't come on or would come on for a very short period of time.
+
+## Evaluation
+
+I evaluated performance by tracking my Relative Brier Points compared to other contestants and reviewed competition platform reports that detailed my forecasts compared to what actually happened and calibration/performance in each question category. By the end of the competition, the model performed strongest in the Goals & Scoring category, beating the crowd on 251 out of 356 forecasts (crowd beat rate of 70%).
+
+## Limitations
+
+Some of these limitations may have been detailed above, but they are detailed here as well:
+
+1. The FBref blending strategy used a small sample size of matches for each team, and many Kalshi markets had already priced most of these statistics in.
+2. The overdispersion parameter wasn't fitted to historical data so it was a less reliable estimate.
+3. Kalshi was only one market I used - I definitely should have used sportsbooks and other liquid estimates to get more reliable predictions.
+
+## Setup
+
+To run this properly, you would need to import the requests, re, and math libraries. And you would also need to import skellam, poisson, nbinom from scipy.stats. The base url for Kalshi works exactly how it is written in the model with no API key.
+
